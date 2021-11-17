@@ -1,12 +1,31 @@
 package com.luxoft.bankapp.domain;
 
-public class CheckingAccount extends AbstractAccount {
+import java.util.UUID;
 
+public class CheckingAccount implements Account {
+
+    private final UUID id = UUID.randomUUID();
     protected double overdraft;
+    protected double balance;
 
     public CheckingAccount(double balance, double overdraft) {
-        super(balance);
+        this.balance = balance;
         this.overdraft = overdraft;
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
+
+    @Override
+    public double getBalance() {
+        return balance;
+    }
+
+    @Override
+    public void setBalance(double amount) {
+        this.balance = amount;
     }
 
     @Override
@@ -14,4 +33,8 @@ public class CheckingAccount extends AbstractAccount {
         return overdraft + balance;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Checking account (id=%s, deposit=%s)", getId(), getBalance());
+    }
 }
