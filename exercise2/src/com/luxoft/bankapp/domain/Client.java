@@ -6,7 +6,7 @@ import java.util.List;
 public class Client {
     private final String name;
 
-    private final List<Account> accounts = new LinkedList<>();
+    private final List<AbstractAccount> accounts = new LinkedList<>();
 
     private final Gender gender;
 
@@ -26,11 +26,11 @@ public class Client {
         throw new UnsupportedOperationException();
     }
 
-    public void addAccount(Account account) {
+    public void addAccount(AbstractAccount account) {
         accounts.add(account);
     }
 
-    public List<Account> getAccounts() {
+    public List<AbstractAccount> getAccounts() {
         return accounts;
     }
 

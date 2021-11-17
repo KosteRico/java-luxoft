@@ -1,24 +1,13 @@
 package com.luxoft.bankapp.domain;
 
-public class SavingAccount extends Account {
+public class SavingAccount extends AbstractAccount {
     public SavingAccount(double balance) {
         super(balance);
     }
 
     @Override
     public double maximumAmountToWithdraw() {
-        return 0;
+        return balance;
     }
 
-    @Override
-    public void withdraw(double amount) {
-        if (balance >= amount) {
-            balance -= amount;
-        }
-    }
-
-    @Override
-    public void deposit(double amount) {
-        balance += amount;
-    }
 }

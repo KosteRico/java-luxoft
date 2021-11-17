@@ -1,22 +1,17 @@
 package com.luxoft.bankapp.domain;
 
-public class CheckingAccount extends Account{
-    public CheckingAccount(double balance) {
+public class CheckingAccount extends AbstractAccount {
+
+    protected double overdraft;
+
+    public CheckingAccount(double balance, double overdraft) {
         super(balance);
+        this.overdraft = overdraft;
     }
 
     @Override
     public double maximumAmountToWithdraw() {
-        return 0;
+        return overdraft + balance;
     }
 
-    @Override
-    public void withdraw(double amount) {
-
-    }
-
-    @Override
-    public void deposit(double amount) {
-
-    }
 }
