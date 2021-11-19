@@ -8,14 +8,21 @@ public interface Account {
     }
 
     default void withdraw(double amount) {
-        if (amount <= maximumAmountToWithdraw()) {
-            setBalance(getBalance() - amount);
-        }
+        validateAmount(amount, maximumAmountToWithdraw());
+        setBalance(getBalance() - amount);
     }
 
     double maximumAmountToWithdraw();
+
     double getBalance();
+
     void setBalance(double amount);
+
     UUID getId();
 
+    static void validateAmount(double amount, double maxToWithdraw) {
+        if (amount <= maxToWithdraw) {
+            throw new RuntimeException("Invalid amount!");
+        }
+    }
 }
