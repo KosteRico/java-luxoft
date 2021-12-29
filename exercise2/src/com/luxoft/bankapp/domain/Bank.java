@@ -1,5 +1,8 @@
 package com.luxoft.bankapp.domain;
 
+import com.luxoft.bankapp.service.ClientStorageService;
+import com.luxoft.bankapp.service.StorageService;
+
 import java.time.OffsetDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,20 +15,20 @@ public class Bank {
             new DebugListener()
     );
 
+    private final StorageService<Client> clientStorageService = new ClientStorageService();
+
     private final List<Client> printedClients = new LinkedList<>();
     private final List<Client> emailedClients = new LinkedList<>();
     private final List<Client> debuggedClients = new LinkedList<>();
 
-    private final List<Client> clients = new LinkedList<>();
-
     public void addClient(Client client) {
-        clients.add(client);
+        clientStorageService.store(client);
 
         listeners.forEach(listener -> listener.onClientAdded(client));
     }
 
     public List<Client> getClients() {
-        return clients;
+        return clientStorageService.getAll();
     }
 
     private class PrintClientListener implements ClientRegistrationListener {
